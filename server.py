@@ -106,5 +106,3 @@ def run_server():
 
 if __name__ == '__main__':
     run_server()
-    # To run the server, execute this script. It will open a web browser to the URL shortener interface.
-    # You can then enter a URL to shorten it. The shortened URL will be displayed on the page.
