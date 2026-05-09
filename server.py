@@ -6,14 +6,11 @@ import mimetypes
 import json
 import string
 
-# Characters for Base62 encoding (lowercase, uppercase, digits)
 BASE62_ALPHABET = string.ascii_letters + string.digits
 BASE62_ALPHABET_LENGTH = len(BASE62_ALPHABET)
 
-# Simple in-memory mapping for URLs
 shortened_urls = {}
 
-# Function to convert a number into a Base62 string
 def encode_base62(num):
     if num == 0:
         return BASE62_ALPHABET[0]
@@ -24,7 +21,6 @@ def encode_base62(num):
         num //= BASE62_ALPHABET_LENGTH
     return ''.join(reversed(base62_str))
 
-# Function to convert a Base62 string back to a number
 def decode_base62(base62_str):
     num = 0
     for char in base62_str:
@@ -66,9 +62,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             original_url = data.get('url', '')
             
             if not original_url.startswith(('http://', 'https://')):
-                original_url = 'http://' + original_url  # auto-add http:// if missing
+                original_url = 'http://' + original_url
             
-            # Generate a unique hash for the URL and encode it in Base62
             short_id = encode_base62(abs(hash(original_url)) % 1000000)
             shortened_urls[short_id] = original_url
 
@@ -90,7 +85,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             return 'text/css'
         return mimetypes.guess_type(file_name)[0] or 'application/octet-stream'
 
-# Map for static files (like before)
 file_map = {
     '/': 'url-shortener/index.html',
     '/style.css': 'url-shortener/style.css',
