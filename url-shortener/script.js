@@ -23,9 +23,6 @@ button.addEventListener('click', () => {
     .catch(error => console.error('Error:', error));
 });
 
-// placeholder disappears automatically when typing (default behavior)
-
-// Toggle dark mode
 toggleDark.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
 });
